@@ -210,8 +210,38 @@ body {
 
 .todo-footer {
   margin-top: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
   font-weight: 600;
   color: var(--text-main);
+}
+
+.clear-completed-btn {
+  border: 1px solid transparent;
+  border-radius: 10px;
+  background: var(--card-bg);
+  color: var(--danger);
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 6px 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.clear-completed-btn:hover {
+  background: var(--delete-bg-hover);
+  border-color: var(--delete-border-hover);
+  color: var(--danger-hover);
+}
+
+.clear-completed-btn:disabled {
+  color: var(--text-subtle);
+  border-color: var(--line);
+  background: var(--surface-soft);
+  cursor: not-allowed;
+  opacity: 0.75;
 }
 
 .sr-only {
@@ -252,5 +282,15 @@ body {
   .add-btn {
     width: 100%;
     min-height: 42px;
+  }
+
+  .todo-footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .clear-completed-btn {
+    width: 100%;
+    min-height: 38px;
   }
 }

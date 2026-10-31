@@ -22,6 +22,7 @@ const remainingText = document.getElementById("remainingText");
 const filterGroup = document.querySelector(".filter-group");
 const filterButtons = document.querySelectorAll(".filter-btn");
 const themeToggleBtn = document.getElementById("themeToggleBtn");
+const clearCompletedBtn = document.getElementById("clearCompletedBtn");
 
 const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
 let currentFilter = FILTER_TYPES.ALL;
@@ -36,6 +37,7 @@ todoList.addEventListener("change", handleToggleTodo);
 todoList.addEventListener("click", handleDeleteTodo);
 filterGroup.addEventListener("click", handleFilterChange);
 themeToggleBtn.addEventListener("click", handleThemeToggle);
+clearCompletedBtn.addEventListener("click", handleClearCompleted);
 bindSystemThemeListener();
 
 function handleAddTodo(event) {
@@ -106,6 +108,22 @@ function handleThemeToggle() {
   localStorage.setItem(THEME_STORAGE_KEY, nextTheme);
 }
 
+function handleClearCompleted() {
+  const completedCount = todos.filter((todo) => todo.completed).length;
+  if (completedCount === 0) {
+    return;
+  }
+
+  const isConfirmed = window.confirm(`確定要清除 ${completedCount} 項已完成待辦嗎?`);
+  if (!isConfirmed) {
+    return;
+  }
+
+  todos = todos.filter((todo) => !todo.completed);
+  saveTodos();
+  renderTodos();
+}
+
 function renderTodos() {
   todoList.innerHTML = "";
   const filteredTodos = getFilteredTodos();
@@ -141,7 +159,10 @@ function renderTodos() {
 
 function updateFooterAndEmptyState(filteredCount) {
   const remainingCount = todos.filter((todo) => !todo.completed).length;
+  const completedCount = todos.length - remainingCount;
   remainingText.textContent = `未完成:${remainingCount} 項`;
+  clearCompletedBtn.disabled = completedCount === 0;
+  clearCompletedBtn.setAttribute("aria-disabled", String(completedCount === 0));
 
   emptyTip.style.display = filteredCount === 0 ? "block" : "none";
   emptyTip.textContent = EMPTY_TIP_TEXT[currentFilter];
