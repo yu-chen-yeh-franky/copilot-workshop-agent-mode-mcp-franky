@@ -4,12 +4,36 @@
   --card-bg: #ffffff;
   --text-main: #1f2a37;
   --text-subtle: #6b7280;
+  --text-inverse: #ffffff;
   --primary: #2f7cf6;
   --primary-hover: #1f68db;
   --danger: #e14d4d;
   --danger-hover: #c73f3f;
   --line: #e5e7eb;
+  --surface-soft: #f5f7fb;
+  --surface-soft-hover: #e9eef8;
+  --delete-bg-hover: #fff3f3;
+  --delete-border-hover: #ffd8d8;
   --shadow: 0 14px 30px rgba(19, 37, 63, 0.1);
+}
+
+[data-theme="dark"] {
+  --bg-gradient-start: #0f172a;
+  --bg-gradient-end: #111827;
+  --card-bg: #1f2937;
+  --text-main: #e5e7eb;
+  --text-subtle: #9ca3af;
+  --text-inverse: #ffffff;
+  --primary: #60a5fa;
+  --primary-hover: #3b82f6;
+  --danger: #f87171;
+  --danger-hover: #ef4444;
+  --line: #374151;
+  --surface-soft: #334155;
+  --surface-soft-hover: #475569;
+  --delete-bg-hover: rgba(248, 113, 113, 0.14);
+  --delete-border-hover: rgba(248, 113, 113, 0.4);
+  --shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
 }
 
 * {
@@ -40,10 +64,34 @@ body {
   padding: 22px;
 }
 
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
 .title {
-  margin: 0 0 18px;
+  margin: 0;
   font-size: 1.8rem;
   letter-spacing: 0.03em;
+}
+
+.theme-toggle-btn {
+  border: 1px solid var(--line);
+  background: var(--surface-soft);
+  color: var(--text-main);
+  border-radius: 999px;
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.theme-toggle-btn:hover {
+  background: var(--surface-soft-hover);
 }
 
 .todo-form {
@@ -74,7 +122,7 @@ body {
   font-size: 1rem;
   font-weight: 600;
   background: var(--primary);
-  color: #fff;
+  color: var(--text-inverse);
   cursor: pointer;
   transition: background-color 0.2s ease;
 }
@@ -88,6 +136,35 @@ body {
   margin: 0;
   padding: 0;
   border-top: 1px solid var(--line);
+}
+
+.filter-group {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.filter-btn {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--card-bg);
+  color: var(--text-subtle);
+  padding: 7px 12px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filter-btn:hover {
+  background: var(--surface-soft);
+  color: var(--text-main);
+}
+
+.filter-btn.is-active {
+  background: var(--primary);
+  color: var(--text-inverse);
+  border-color: var(--primary);
 }
 
 .todo-item {
@@ -112,7 +189,7 @@ body {
 .delete-btn {
   border: 1px solid transparent;
   border-radius: 10px;
-  background: #fff;
+  background: var(--card-bg);
   color: var(--danger);
   font-size: 0.9rem;
   padding: 6px 10px;
@@ -121,8 +198,8 @@ body {
 }
 
 .delete-btn:hover {
-  background: #fff3f3;
-  border-color: #ffd8d8;
+  background: var(--delete-bg-hover);
+  border-color: var(--delete-border-hover);
   color: var(--danger-hover);
 }
 
@@ -157,6 +234,15 @@ body {
 
   .title {
     font-size: 1.5rem;
+  }
+
+  .card-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .theme-toggle-btn {
+    width: 100%;
   }
 
   .todo-form {
