@@ -10,7 +10,8 @@ const FILTER_TYPES = {
 const EMPTY_TIP_TEXT = {
   [FILTER_TYPES.ALL]: "還沒有任何待辦事項,新增一個吧!",
   [FILTER_TYPES.ACTIVE]: "目前沒有未完成的待辦事項!",
-  [FILTER_TYPES.COMPLETED]: "目前沒有已完成的待辦事項!",
+  [FILTER_TYPES.COMPLETED]:
+    "目前沒有已完成的待辦事項;剛剛取消勾選的項目只是被篩選到「未完成」,不是被刪除。",
 };
 
 const todoForm = document.getElementById("todoForm");
